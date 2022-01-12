@@ -1,5 +1,5 @@
 from ctk_cli import CLIArgumentParser
-import girder_client as gc
+import girder_client
 
 
 def descend_folder(gc, folder_id, verbose=True):
