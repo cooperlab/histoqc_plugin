@@ -1,5 +1,6 @@
 from ctk_cli import CLIArgumentParser
 import girder_client
+import os
 
 
 def descend_folder(gc, folder_id, verbose=True):
@@ -33,6 +34,12 @@ def query_slide(gc, slide_id, verbose=True):
     return
 
 
+def parse_dir_input(directory):
+    #Parses girder ID out of directory argument passed to CLI
+
+    return directory.split(os.sep)[4]
+
+
 def main(args):
     """We expect to receive a girder ID of a folder (directory), a Girder API url (girderApiUrl),
     and a Girder token (girderToken). We use the Girder API to walk the folders recursively,
@@ -44,7 +51,7 @@ def main(args):
     gc.setToken(args.girderToken)
 
     #descend recursively into folders and analyze each slide within
-    descend_folder(gc, args.directory)
+    descend_folder(gc, parse_dir_input(args.directory))
 
 
 if __name__ == '__main__':
